@@ -59,7 +59,7 @@ def download():
             video.stream_to_buffer(buffer)
         except:
             flash("Something went wrong! Please try again")
-            redirect(url_for('home'))
+            return redirect(url_for('home'))
 
         buffer.seek(0)
         return send_file(buffer, as_attachment=True, download_name=title + '.mp4', mimetype='video/mp4')
