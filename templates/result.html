@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %} Home{% endblock title %}
+{% block body %}
+
+<!--Form for search (Horizontal Centering)-->
+<div class="mx-auto" style="width: 500px;">
+    {% if info %}
+        <div>
+            <img src="{{info.thumbnail}}" alt="video_thumbnail" style="width:auto; height:350px;">
+            <h5>{{info.title}}</h5>
+              <form class="d-flex padding" action="/download" method="post">
+                  <button type="submit" name="url" value={{info.url}} >Download</button>
+                  <select name="quality">
+                      {% for i in info.qualities %}
+                        {% if i %}
+                            <option value="{{i}}">{{i}}</option>
+                        {% endif %}
+                      {% endfor %}
+                  </select>
+              </form>
+        </div>
+    {% endif %}
+</div>
+{% endblock body %}
