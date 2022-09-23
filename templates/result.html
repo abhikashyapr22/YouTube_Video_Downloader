@@ -2,22 +2,45 @@
 {% block title %} Home{% endblock title %}
 {% block body %}
 
+<!--error message-->
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{message}}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
+
 <!--Form for search (Horizontal Centering)-->
-<div class="mx-auto" style="width: 500px;">
+<div class="mx-auto" style="width: 500px; align:center;">
     {% if info %}
         <div>
-            <img src="{{info.thumbnail}}" alt="video_thumbnail" style="width:auto; height:350px;">
+            <img src="{{info.thumbnail}}" alt="video_thumbnail" style="width:auto; height:350px; padding:30px 0px 10px 0px;">
             <h5>{{info.title}}</h5>
-              <form class="d-flex padding" action="/download" method="post">
-                  <button type="submit" name="url" value={{info.url}} >Download</button>
+              <form class="d-flex padding" action="/download_video" method="post">
+                  <button type="submit" name="url" value={{info.url}} >Download Video</button>
                   <select name="quality">
-                      {% for i in info.qualities %}
+                      {% for i in info.v_qualities %}
                         {% if i %}
                             <option value="{{i}}">{{i}}</option>
                         {% endif %}
                       {% endfor %}
                   </select>
               </form>
+            {% if info.audio_files %}
+              <form class="d-flex padding" action="/download_audio" method="post" style="padding:5px 0px 0px 0px;">
+                  <button type="submit" name="url" value={{info.url}} >Download Audio</button>
+                  <select name="itag">
+                      {% for i in info.audio_files %}
+                        {% if i %}
+                            <option value="{{i.itag}}">{{i.abr}}</option>
+                        {% endif %}
+                      {% endfor %}
+                  </select>
+              </form>
+            {% endif %}
         </div>
     {% endif %}
 </div>
