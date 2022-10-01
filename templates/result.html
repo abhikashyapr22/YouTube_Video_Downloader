@@ -2,16 +2,6 @@
 {% block title %} Home{% endblock title %}
 {% block body %}
 
-<!--error message-->
-{% with messages = get_flashed_messages() %}
-    {% if messages %}
-        <ul>
-            {% for message in messages %}
-                <li>{{message}}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
-{% endwith %}
 
 <!--Form for search (Horizontal Centering)-->
 <div class="mx-auto" style="width: 500px; align:center;">
@@ -44,4 +34,14 @@
         </div>
     {% endif %}
 </div>
+
+<!--error message-->
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+            {% for message in messages %}
+                <p style="text-align:center;"> Error: {{message}}</p>
+            {% endfor %}
+    {% endif %}
+{% endwith %}
+
 {% endblock body %}

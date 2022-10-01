@@ -2,17 +2,6 @@
 {% block title %} Home{% endblock title %}
 {% block body %}
 
-<!--error message-->
-{% with messages = get_flashed_messages() %}
-    {% if messages %}
-        <ul>
-            {% for message in messages %}
-                <li>{{message}}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
-{% endwith %}
-
 <!--Form for search (Horizontal Centering)-->
 <div class="mx-auto" style="width: 500px;">
   <form class="d-flex padding" action="/info" method="post" style="padding:30px;">
@@ -24,4 +13,15 @@
     <h3 class="text-center" style="padding:30px; font-family: Helvetica, cursive, sans-serif; color:lightgreen;">Please enter the URL of YouTube video, you want to download :)</h3>
 <!--    <img src="#" alt="user instruction" style="width:auto; height:360px;">-->
 </div>
+
+<!--error message-->
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+            {% for message in messages %}
+                <p style="text-align:center;"> Error: {{message}}</p>
+            {% endfor %}
+    {% endif %}
+{% endwith %}
+
+
 {% endblock body %}
